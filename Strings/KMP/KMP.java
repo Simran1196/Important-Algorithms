@@ -1,9 +1,14 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package test;
 
 import java.io.*;
 import java.util.*;
 
-public class KMP
+public class Test
 
  {
 	public static void main (String[] args)throws IOException
@@ -18,7 +23,7 @@ public class KMP
         {
             int m = pat.length();
             int n = txt.length();
-            
+            int f=0;
             int[] longestprefixsuffix = new int[m];
             computeLPS(longestprefixsuffix,pat,m);
             
@@ -26,12 +31,18 @@ public class KMP
             int j=0;
             while(i<n && j<m)
             {
-                if(pat.charAt(i)==pat.charAt(j))
+                if(txt.charAt(i)==pat.charAt(j))
                 {
                     i++;
                     j++;
                 }
-                else
+                if(j==m)
+                {
+                   System.out.println("Match"); 
+                   f=1;
+                   break;
+                }
+                else if(txt.charAt(i)!=pat.charAt(j))
                 {
                     if(j==0)
                         i++;
@@ -40,9 +51,7 @@ public class KMP
                 }
             }
             
-            if(j==m)
-                System.out.println("Match");
-            else
+            if(f==0)
                System.out.println("NonMatch."); 
         }
         
